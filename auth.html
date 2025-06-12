@@ -1,21 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <title>Connexion - CarCare</title>
   <link rel="stylesheet" href="main.css" />
 </head>
+
+
 <body class="auth-page">
   <div class="login-container">
     <h1>Bienvenue sur CarCare</h1>
     <p class="subtitle">Connectez-vous pour accéder à vos véhicules</p>
     
     <form class="login-form">
-      <input type="email" placeholder="Adresse e-mail" required />
-      <input type="password" placeholder="Mot de passe" required />
-      <button type="submit">Se connecter</button>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Mot de passe" required>
+            
+            <a href="dashboard.html" class="btn-primary">Se connecter</a>
+
       <p class="signup-link">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></p>
     </form>
   </div>
+  <script>
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email && password) {
+        window.location.href ="/dashboard.html";
+      } else {
+        alert("Champs obligatoires !");
+      }
+    });
+  </script>
+
+
 </body>
 </html>
