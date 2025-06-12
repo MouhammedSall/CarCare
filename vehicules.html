@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Véhicules – CarCare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      position: fixed;
+      background-color: #1a252f;
+      padding-top: 30px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar h2 {
+      color: #00bcd4;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      padding: 15px 25px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #34495e;
+      color: #00bcd4;
+    }
+
+    /* Contenu principal */
+    .main-content {
+      margin-left: 240px;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-card {
+      background-color: #34495e;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-control {
+      background-color: white;
+      color: black;
+    }
+
+    .form-control::placeholder {
+      color: #666;
+    }
+
+    .btn-primary {
+      background-color: #00bcd4;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0097a7;
+    }
+
+    .vehicle-card {
+      background-color: #ecf0f1;
+      color: #2c3e50;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s;
+    }
+
+    .vehicle-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2><i class="fas fa-car-side"></i> CarCare</h2>
+  <a href="Projet Carcare.html"><i class="fas fa-home me-2"></i>Accueil</a>
+  <a href="vehicules.html" class="active"><i class="fas fa-car me-2"></i>Véhicules</a>
+  <a href="entretiens.html"><i class="fas fa-tools me-2"></i>Entretiens</a>
+  <a href="rappels.html"><i class="fas fa-bell me-2"></i>Rappels</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <h1><i class="fas fa-car-side me-2"></i>Mes Véhicules</h1>
+
+  <!-- Formulaire d'ajout -->
+  <div class="form-card">
+    <h2>➕ Ajouter un véhicule</h2>
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <input type="text" id="marque" class="form-control" placeholder="Marque">
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="modele" class="form-control" placeholder="Modèle">
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="plaque" class="form-control" placeholder="Plaque d'immatriculation">
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="ajouterVehicule()">Ajouter</button>
+  </div>
+
+  <!-- Liste des véhicules -->
+  <h2>🚗 Liste de mes véhicules</h2>
+  <div id="vehicules-container" class="row g-4">
+    <!-- JS va injecter les véhicules ici -->
+  </div>
+</div>
+
+<script>
+  // Liste initiale de véhicules (optionnel)
+  const vehicules = [
+    { marque: "Peugeot", modele: "208", plaque: "AB-123-CD" },
+    { marque: "Renault", modele: "Clio", plaque: "XY-456-ZT" }
+  ];
+
+  const container = document.getElementById("vehicules-container");
+
+  function afficherVehicule({ marque, modele, plaque }) {
+    const card = document.createElement("div");
+    card.className = "col-md-4";
+    card.innerHTML = `
+      <div class="vehicle-card">
+        <h5>${marque} ${modele}</h5>
+        <p><strong>Plaque :</strong> ${plaque}</p>
+      </div>
+    `;
+    container.appendChild(card);
+  }
+
+  vehicules.forEach(afficherVehicule);
+
+  function ajouterVehicule() {
+    const marque = document.getElementById("marque").value.trim();
+    const modele = document.getElementById("modele").value.trim();
+    const plaque = document.getElementById("plaque").value.trim();
+
+    if (!marque || !modele || !plaque) {
+      alert("Merci de remplir tous les champs.");
+      return;
+    }
+
+    const nouveau = { marque, modele, plaque };
+    afficherVehicule(nouveau);
+
+    document.getElementById("marque").value = "";
+    document.getElementById("modele").value = "";
+    document.getElementById("plaque").value = "";
+  }
+</script>
+
+</body>
+</html>
